@@ -40,6 +40,7 @@ class BodyWidgets extends StatelessWidget {
             height: MediaQuery.of(context).padding.top,
           ),
           ScoreWidget(),
+          
         ],
       ),
     );
