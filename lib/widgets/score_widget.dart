@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 
-
 class ScoreWidget extends StatelessWidget {
   const ScoreWidget({
     Key? key,
