@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class BottomButtons extends StatelessWidget {
+class BottomButtons extends StatefulWidget {
   final Function clearScoreBoard;
+  final Function clearBoard;
 
-  BottomButtons(this.clearScoreBoard);
+  BottomButtons(this.clearScoreBoard, this.clearBoard);
 
+  @override
+  State<BottomButtons> createState() => _BottomButtonsState();
+}
+
+class _BottomButtonsState extends State<BottomButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 50, left: 50, bottom: 10),
+      margin: EdgeInsets.only(left:50,right:50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -16,7 +22,7 @@ class BottomButtons extends StatelessWidget {
             color: Color(0xf0037A7E),
             textColor: Colors.white,
             onPressed: () {
-              clearScoreBoard;
+             widget.clearScoreBoard();
             },
             child: Text(
               "NEW GAME",
@@ -26,7 +32,7 @@ class BottomButtons extends StatelessWidget {
             color: Color(0xf0037A7E),
             textColor: Colors.white,
             onPressed: () {
-              clearScoreBoard;
+              widget.clearBoard();
             },
             child: Text("RESET GAME"),
           ),

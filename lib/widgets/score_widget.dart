@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 
-class ScoreWidget extends StatelessWidget {
-  const ScoreWidget({
-    Key? key,
-  }) : super(key: key);
+class ScoreWidget extends StatefulWidget {
+  final int xScore;
+  final int oScore;
 
+  ScoreWidget(this.xScore, this.oScore);
+
+  @override
+  State<ScoreWidget> createState() => _ScoreWidgetState();
+}
+
+class _ScoreWidgetState extends State<ScoreWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +27,7 @@ class ScoreWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "0 : 0",
+            "${widget.xScore} : ${widget.oScore}",
             style: TextStyle(
               color: Colors.white,
               fontSize: 48,
