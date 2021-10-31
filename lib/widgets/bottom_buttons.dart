@@ -14,7 +14,7 @@ class _BottomButtonsState extends State<BottomButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left:50,right:50),
+      margin: EdgeInsets.only(left: 50, right: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -22,7 +22,7 @@ class _BottomButtonsState extends State<BottomButtons> {
             color: Color(0xf0037A7E),
             textColor: Colors.white,
             onPressed: () {
-             widget.clearScoreBoard();
+              widget.clearScoreBoard();
             },
             child: Text(
               "NEW GAME",

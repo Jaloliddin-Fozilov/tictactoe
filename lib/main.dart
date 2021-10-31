@@ -37,10 +37,11 @@ class BodyWidgets extends StatefulWidget {
 }
 
 class _BodyWidgetsState extends State<BodyWidgets> {
+  bool _showResult = false;
 
   // 1st player is O
   bool oTurn = false;
-  
+
   List<String> displayElement = ['', '', '', '', '', '', '', '', ''];
   int oScore = 0;
   int xScore = 0;
@@ -177,18 +178,51 @@ class _BodyWidgetsState extends State<BodyWidgets> {
     });
   }
 
+  Widget _showPortraitItems() {
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).padding.top,
+        ),
+        ScoreWidget(xScore, oScore),
+        BodyGridView(tapped, displayElement),
+        BottomButtons(clearScoreBoard, clearBoard),
+      ],
+    );
+  }
+
+  Widget _showLandscapteItems() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Hisobni ko'rsatish"),
+            Switch(
+                value: _showResult,
+                onChanged: (value) {
+                  setState(() {
+                    _showResult = value;
+                  });
+                })
+          ],
+        ),
+        _showResult
+            ? ScoreWidget(xScore, oScore)
+            : BodyGridView(tapped, displayElement),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).padding.top,
-          ),
-          ScoreWidget(xScore,oScore),
-          BodyGridView(tapped, displayElement),
-          BottomButtons(clearScoreBoard, clearBoard),
+          isPortrait ? _showPortraitItems() : _showLandscapteItems(),
         ],
       ),
     );

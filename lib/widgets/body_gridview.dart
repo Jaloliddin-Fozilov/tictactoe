@@ -15,11 +15,11 @@ class _BodyGridViewState extends State<BodyGridView> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-       flex: 3,
+      flex: 3,
       child: Container(
         margin: EdgeInsets.all(20),
         child: GridView.builder(
-          scrollDirection: Axis.vertical,
+            scrollDirection: Axis.vertical,
             itemCount: 9,
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
@@ -36,7 +36,9 @@ class _BodyGridViewState extends State<BodyGridView> {
                   child: Center(
                     child: Text(
                       widget.displayElement[index],
-                      style: widget.displayElement[index] == "X" ? TextStyle(color: Colors.white, fontSize: 72) : TextStyle(color: Color(0xf0075557), fontSize: 72),
+                      style: widget.displayElement[index] == "X"
+                          ? TextStyle(color: Colors.white, fontSize: 72)
+                          : TextStyle(color: Color(0xf0075557), fontSize: 72),
                     ),
                   ),
                 ),
