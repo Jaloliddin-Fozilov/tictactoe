@@ -37,7 +37,7 @@ class BodyWidgets extends StatefulWidget {
 }
 
 class _BodyWidgetsState extends State<BodyWidgets> {
-  bool _showResult = false;
+  bool showResult = true;
 
   // 1st player is O
   bool oTurn = false;
@@ -54,6 +54,7 @@ class _BodyWidgetsState extends State<BodyWidgets> {
         displayElement[i] = '';
       }
     });
+    showResult = false;
     filledBoxes = 0;
   }
 
@@ -113,6 +114,7 @@ class _BodyWidgetsState extends State<BodyWidgets> {
         displayElement[i] = '';
       }
     });
+    showResult = false;
 
     filledBoxes = 0;
   }
@@ -178,39 +180,50 @@ class _BodyWidgetsState extends State<BodyWidgets> {
     });
   }
 
-  Widget _showPortraitItems() {
+  Widget _showPortraitItems(isPortrait) {
     return Column(
       children: [
         SizedBox(
           height: MediaQuery.of(context).padding.top,
         ),
         ScoreWidget(xScore, oScore),
-        BodyGridView(tapped, displayElement),
+        BodyGridView(tapped, displayElement, isPortrait),
         BottomButtons(clearScoreBoard, clearBoard),
       ],
     );
   }
 
-  Widget _showLandscapteItems() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Hisobni ko'rsatish"),
-            Switch(
-                value: _showResult,
-                onChanged: (value) {
-                  setState(() {
-                    _showResult = value;
-                  });
-                })
-          ],
-        ),
-        _showResult
-            ? ScoreWidget(xScore, oScore)
-            : BodyGridView(tapped, displayElement),
-      ],
+  Widget _showLandscapteItems(isPortrait) {
+    return Container(
+      height: MediaQuery.of(context).size.height - 50,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Hisobni ko'rsatish",
+                style: TextStyle(color: Colors.white),
+              ),
+              Switch(
+                  value: showResult,
+                  onChanged: (value) {
+                    setState(() {
+                      showResult = value;
+                    });
+                  })
+            ],
+          ),
+          showResult
+              ? Column(
+                  children: [
+                    ScoreWidget(xScore, oScore),
+                    BottomButtons(clearScoreBoard, clearBoard),
+                  ],
+                )
+              : BodyGridView(tapped, displayElement, isPortrait),
+        ],
+      ),
     );
   }
 
@@ -220,11 +233,9 @@ class _BodyWidgetsState extends State<BodyWidgets> {
         MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       alignment: Alignment.center,
-      child: Column(
-        children: [
-          isPortrait ? _showPortraitItems() : _showLandscapteItems(),
-        ],
-      ),
+      child: isPortrait
+          ? _showPortraitItems(isPortrait)
+          : _showLandscapteItems(isPortrait),
     );
   }
 }
